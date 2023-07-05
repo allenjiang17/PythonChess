@@ -1,4 +1,4 @@
-
+import copy
 
 
 class Board():
@@ -63,10 +63,14 @@ class Board():
             self.b_king_location = end_pos
 
         # update turn
-        if piece.color == "W":
+        if self.turn == "W":
             self.turn = "B"
+            print("Black's Turn Now")
+
         else:
             self.turn = "W"
+            print("White's Turn Now")
+
 
         return
 
@@ -77,6 +81,7 @@ class Board():
 
             #1. Check if the piece is a pawn. in that case, special rules that they can take diagonally
             if piece.unicode_rep == u'\u2659':
+                #try specifically the edge case where the piece selected is a pawn and it is taking diagonally
                 try:
                     pawn_target = self.pieces[end_pos]
 
@@ -86,13 +91,15 @@ class Board():
                         self.pieces[end_pos] = piece
                         del self.pieces[start_pos]
 
-                        piece.set_position(end_pos)
+                        piece.set_position(end_pos) #change to using change_piece_position
 
                         return True
 
                 except KeyError:
+                    #if not, pass on to normal sequence
                     pass
 
+            #same for the other color pawn
             elif piece.unicode_rep == u'\u265F':
                 try:
                     pawn_target = self.pieces[end_pos]
@@ -139,6 +146,8 @@ class Board():
             except KeyError:
                 pass
 
+            #if none of the previous checks have failed, then move the piece
+            print("Moving Piece Successfully")
             self.change_piece_position(start_pos, end_pos)
             return True
 
@@ -287,27 +296,30 @@ class Board():
     def move_check(self, start_pos, end_pos):
 
         print("checking move:", start_pos, end_pos)
-        print("moving piece temporarily")
-        self.change_piece_position(start_pos, end_pos)
+        #print("moving piece temporarily")
+
+        temp_board = copy.deepcopy(self)
+        
+        temp_board.change_piece_position(start_pos, end_pos)
 
         #try check
-        print("checking for the board for check")
-        self.is_check()
+        #print("checking for the board for check")
+        temp_board.is_check()
 
-        if (self.turn == "B" and self.w_king_check) or (self.turn == "W" and self.b_king_check):
-            print ("illegal move")
+        if (temp_board.turn == "B" and temp_board.w_king_check) or (temp_board.turn == "W" and temp_board.b_king_check):
+            #print ("illegal move")
 
             #move back
-            print("moving piece back")
-            self.change_piece_position(end_pos, start_pos)
-            self.is_check()
+            #print("moving piece back")
+            #self.change_piece_position(end_pos, start_pos)
+            #self.is_check()
             return False
         else:
 
             #move back
-            print("moving piece back")
-            self.change_piece_position(end_pos, start_pos)
-            self.is_check()
+            #print("moving piece back")
+            #self.change_piece_position(end_pos, start_pos)
+            #self.is_check()
             return True
 
 

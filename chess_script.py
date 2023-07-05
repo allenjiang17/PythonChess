@@ -1,17 +1,17 @@
 
 import chess
 
-
-
 myBoard = chess.Board()
+myBoard.print_board()
 myBoard.print_moveset((0,4))
 
 print("=============")
+myBoard.print_board()
 myBoard.move_piece((0,1), (2, 2))
 myBoard.print_moveset((2,2))
 
 print("=============")
-
+myBoard.print_board()
 myBoard.move_piece((7,5), (4,2))
 myBoard.print_moveset((2,4))
 

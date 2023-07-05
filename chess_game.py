@@ -9,10 +9,10 @@ import chess
 WINDOW_HEIGHT = 640
 WINDOW_WIDTH = 640
 SQUARE_SIZE = WINDOW_HEIGHT/8
-LIGHT_SQUARE_COLOR = (238,232,170)
-DARK_SQUARE_COLOR = (85,107,47)
-HIGHLIGHT_SQUARE_COLOR = (0, 80, 0)
-CHECK_COLOR = (255,0,255)
+LIGHT_SQUARE_COLOR = (252, 247, 242)
+DARK_SQUARE_COLOR = (230, 198, 163)
+HIGHLIGHT_SQUARE_COLOR = (18, 183, 43)
+CHECK_COLOR = (30,30,30)
 
 class Piece(pygame.sprite.Sprite):
 
@@ -142,6 +142,7 @@ display_board()
 running = True
 piece_selected = False
 square_selected = ()
+legal_moveset = []
 
 while running:
     # Did the user click the window close button?
@@ -156,6 +157,8 @@ while running:
 
             rank = int(7 - (pos[1] // SQUARE_SIZE))
             file = int(pos[0] // SQUARE_SIZE)
+
+            print("Square/piece selected: " + str(rank) + str(file))
 
             #clear surface
             screen.blit(board_background, (0,0))
@@ -173,9 +176,9 @@ while running:
                 # only display moves if right color is selected
                 if myBoard.pieces[(rank, file)].color == myBoard.turn:
 
-                    move_squares = myBoard.generate_moveset_with_check_test(myBoard.pieces[(rank,file)])
+                    legal_moveset = myBoard.generate_moveset_with_check_test(myBoard.pieces[(rank,file)])
 
-                    for square in move_squares:
+                    for square in legal_moveset:
                         #pygame.draw.rect(screen, HIGHLIGHT_SQUARE_COLOR, (square[1]*SQUARE_SIZE, (7-square[0])*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
                         pygame.draw.circle(screen, HIGHLIGHT_SQUARE_COLOR, (square[1]*SQUARE_SIZE+(SQUARE_SIZE/2), (7-square[0])*SQUARE_SIZE + (SQUARE_SIZE/2)), 10)
 
@@ -196,22 +199,26 @@ while running:
             rank = int(7 - (pos[1] // SQUARE_SIZE))
             file = int(pos[0] // SQUARE_SIZE)
 
-            result = myBoard.move_piece(square_selected, (rank,file))
+            #generate moveset for piece
+            if (rank, file) in legal_moveset:
+                result = myBoard.move_piece(square_selected, (rank,file))
+                print("Move result:", result)
 
-            if result == True:
+                if result == True:
 
-                screen.blit(board_background, (0,0))
+                    screen.blit(board_background, (0,0))
 
-                #check if any king is in check
-                myBoard.is_check()
-                if myBoard.b_king_check:
-                    pygame.draw.rect(screen, CHECK_COLOR,
-                                 (myBoard.b_king_location[1] * SQUARE_SIZE, (7 - myBoard.b_king_location[0]) * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-                elif myBoard.w_king_check:
-                    pygame.draw.rect(screen, CHECK_COLOR,
-                                 (myBoard.w_king_location[1] * SQUARE_SIZE, (7 - myBoard.w_king_location[0]) * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                    #check if any king is in check
+                    myBoard.is_check()
+                    if myBoard.b_king_check:
+                        pygame.draw.rect(screen, CHECK_COLOR,
+                                    (myBoard.b_king_location[1] * SQUARE_SIZE, (7 - myBoard.b_king_location[0]) * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                    elif myBoard.w_king_check:
+                        pygame.draw.rect(screen, CHECK_COLOR,
+                                    (myBoard.w_king_location[1] * SQUARE_SIZE, (7 - myBoard.w_king_location[0]) * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
-                display_board()
+                    display_board()
+                    myBoard.print_board()
 
             piece_selected = False
 
