@@ -1,6 +1,7 @@
 # PythonChess
 
 A simple implementation of Chess using Python and object-oriented programming.
+
 chess.py contains the essential functions and classes for Chess. Each piece is its own object that has its functions for generating a legal moveset. The Board class contains the locations of each piece and implements game-wide functions such as checking for check, determining how each piece's moveset changes as it interacts with other pieces. 
 
 chess_game.py demonstrates a rudimentary working GUI for chess using Pygame.
