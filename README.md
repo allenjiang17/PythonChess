@@ -11,14 +11,14 @@ To run chess_game.py, first download Pygame: https://www.pygame.org/wiki/Getting
 ## Examples:
 
 ### Shows legal moves when piece is highlighted
-<img src="/examples/chess_ex1.png" width="300">
-<img src="/examples/chess_ex4.png" width="300">
+<img src="https://github.com/allenjiang17/PythonChess/blob/main/examples/chess_ex1.png" width="300">
+<img src="https://github.com/allenjiang17/PythonChess/blob/main/examples/chess_ex4.png" width="300">
 
 ### King highlighted when in check
-<img src="/examples/chess_ex3.png" width="300">
+<img src="https://github.com/allenjiang17/PythonChess/blob/main/examples/chess_ex3.png" width="300">
 
 ### Pawn has no legal moves since it would expose King to check
-<img src="/examples/chess_ex2.png" width="300">
+<img src="https://github.com/allenjiang17/PythonChess/blob/main/examples/chess_ex2.png" width="300">
 
 ## TODO:
 Checkmate and end game condition needs to be implemented
