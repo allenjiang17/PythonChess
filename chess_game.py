@@ -26,41 +26,41 @@ class Piece(pygame.sprite.Sprite):
 
         if color == "W":
             if type == "R":
-                self.image = pygame.image.load("white_rook.png")
+                self.image = pygame.image.load("icons/white_rook.png")
             elif type == "N":
-                self.image = pygame.image.load("white_knight.png")
+                self.image = pygame.image.load("icons/white_knight.png")
 
             elif type == "B":
-                self.image = pygame.image.load("white_bishop.png")
+                self.image = pygame.image.load("icons/white_bishop.png")
 
             elif type == "Q":
-                self.image = pygame.image.load("white_queen.png")
+                self.image = pygame.image.load("icons/white_queen.png")
 
             elif type == "K":
-                self.image = pygame.image.load("white_king.png")
+                self.image = pygame.image.load("icons/white_king.png")
 
             elif type == "P":
-                self.image = pygame.image.load("white_pawn.png")
+                self.image = pygame.image.load("icons/white_pawn.png")
 
         else:
 
             if type == "R":
-                self.image = pygame.image.load("black_rook.png")
+                self.image = pygame.image.load("icons/black_rook.png")
 
             elif type == "N":
-                self.image = pygame.image.load("black_knight.png")
+                self.image = pygame.image.load("icons/black_knight.png")
 
             elif type == "B":
-                self.image = pygame.image.load("black_bishop.png")
+                self.image = pygame.image.load("icons/black_bishop.png")
 
             elif type == "Q":
-                self.image = pygame.image.load("black_queen.png")
+                self.image = pygame.image.load("icons/black_queen.png")
 
             elif type == "K":
-                self.image = pygame.image.load("black_king.png")
+                self.image = pygame.image.load("icons/black_king.png")
 
             elif type == "P":
-                self.image = pygame.image.load("black_pawn.png")
+                self.image = pygame.image.load("icons/black_pawn.png")
 
         self.image = pygame.transform.scale(self.image, (70, 70))
         self.surf.blit(self.image, (5,5))

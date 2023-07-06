@@ -1,6 +1,5 @@
 import copy
 
-
 class Board():
 
     def __init__(self):
@@ -709,9 +708,6 @@ class King(Piece):
     def moves_to_position(self, position):
 
         return []
-
-
-
 
 
 
