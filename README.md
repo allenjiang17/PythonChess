@@ -7,19 +7,19 @@ chess_game.py demonstrates a rudimentary working GUI for chess using Pygame.
 
 To run chess_game.py, first download Pygame: https://www.pygame.org/wiki/GettingStarted
 
-Examples:
+## Examples:
 
-Shows legal moves when piece is highlighted
+### Shows legal moves when piece is highlighted
 ![Alt text](/examples/chess_ex1.png)
 ![Alt text](/examples/chess_ex4.png)
 
-King highlighted when in check
+### King highlighted when in check
 ![Alt text](/examples/chess_ex3.png)
 
-Pawn has no legal moves since it would expose King to check
+### Pawn has no legal moves since it would expose King to check
 ![Alt text](/examples/chess_ex2.png)
 
-TODO:
+## TODO:
 Checkmate and end game condition needs to be implemented
 
 
