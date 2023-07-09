@@ -61,6 +61,9 @@ class Board():
         elif piece.unicode_rep == u'\u265A':
             self.b_king_location = end_pos
 
+        # update check status
+        self.is_check()
+
         # update turn
         if self.turn == "W":
             self.turn = "B"
@@ -277,19 +280,40 @@ class Board():
     # checks the board to see if the current board state is a state of check
     def is_check(self):
 
+        self.b_king_check = False
+        self.w_king_check = False
+
         for piece in self.pieces.values():
             if piece.color == "W":
                 if self.b_king_location in self.generate_moveset(piece):
                     print("Black King in check")
                     self.b_king_check = True
-                else:
-                    self.b_king_check = False
             if piece.color == "B":
                 if self.w_king_location in self.generate_moveset(piece):
                     print("White King in check")
                     self.w_king_check = True
-                else:
-                    self.w_king_check = False
+
+
+    def is_checkmate(self):
+        
+        if self.w_king_check:
+            white_pieces = [piece for piece in self.pieces.values() if piece.color == "W"]
+            for piece in white_pieces:
+                if len(self.generate_moveset_with_check_test(piece)) != 0:
+                    print("Piece has move, no checkmate")
+                    return False
+            return True
+
+        elif self.b_king_check:
+            black_pieces = [piece for piece in self.pieces.values() if piece.color == "B"]
+            for piece in black_pieces:
+                if len(self.generate_moveset_with_check_test(piece)) != 0:
+                    print("Piece has move, no checkmate")
+                    return False
+            return True
+
+        else:
+            return False        
 
     #checks if a move is illegal
     def move_check(self, start_pos, end_pos):
